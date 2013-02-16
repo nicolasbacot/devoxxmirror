@@ -5,10 +5,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 @Path("/helloworld")
-@Produces("application/json")
 public class HelloWorldRESTService {
 
 	@GET
+	@Produces("application/json")
 	public String helloCloud(){
 		return "Welcome to the Cloud";
 	}
