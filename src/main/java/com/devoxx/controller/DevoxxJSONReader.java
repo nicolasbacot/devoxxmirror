@@ -28,7 +28,7 @@ public class DevoxxJSONReader {
         try {
             out = response.getEntity().getContent();
         } catch (Exception ex) {
-            Logger.getLogger(DevoxxJSONReaderTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DevoxxJSONReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return out;
     }
