@@ -7,27 +7,25 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.devoxx.ejb.DevoxxCacheBean;
-import com.devoxx.model.Speaker;
+import com.devoxx.model.Talk;
 
 
-@Path("/speakers")
+@Path("/talks")
 @Produces("application/json")
-public class SpeakersRESTService {
+public class TalksRESTService {
 
 	@EJB
 	private DevoxxCacheBean devoxxReader;
 	
 	@GET
-	public Speaker[] getSpeakers(){
-		return devoxxReader.getSpeakers();
+	public Talk[] getTalks(){
+		return devoxxReader.getTalks();
 	}
-
+	
 	@GET
 	@Path("{id}")
-	public Speaker getSpeaker(@PathParam("id") String id){
-		return devoxxReader.getSpeaker(id);
+	public Talk getTalk(@PathParam("id") String id){
+		return devoxxReader.getTalk(id);
 	}
-	
-	
-	
+
 }
