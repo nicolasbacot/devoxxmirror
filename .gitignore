@@ -11,3 +11,5 @@ target
 *.eml
 *.iml
 .idea
+
+.DS_Store
