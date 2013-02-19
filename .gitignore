@@ -6,3 +6,8 @@
 *.ear
 
 target
+
+# Intellij Files #
+*.eml
+*.iml
+.idea
