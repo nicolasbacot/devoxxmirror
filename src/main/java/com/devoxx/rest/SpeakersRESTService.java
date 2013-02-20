@@ -1,6 +1,8 @@
 package com.devoxx.rest;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,9 +12,10 @@ import com.devoxx.model.Speaker;
 
 
 @Path("/speakers")
+@Stateless
 public class SpeakersRESTService {
 
-	@EJB
+	@Inject
 	private DevoxxReaderBean devoxxReader;
 	
 	@GET
