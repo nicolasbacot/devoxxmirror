@@ -16,7 +16,7 @@ public class Speaker {
 
 	private String tweethandle;
 
-	private Talk[] talks;
+	private EmbeddedTalk[] talks;
 
 	public Long getId() {
 		return id;
@@ -54,11 +54,11 @@ public class Speaker {
 		this.tweethandle = tweethandle;
 	}
 
-	public Talk[] getTalks() {
+	public EmbeddedTalk[] getTalks() {
 		return talks;
 	}
 
-	public void setTalks(Talk[] talks) {
+	public void setTalks(EmbeddedTalk[] talks) {
 		this.talks = talks;
 	}
 

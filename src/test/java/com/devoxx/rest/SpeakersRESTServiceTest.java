@@ -1,7 +1,7 @@
 package com.devoxx.rest;
 
-import com.devoxx.controller.DevoxxJSONReader;
-import com.devoxx.ejb.DevoxxReaderBean;
+import com.devoxx.ejb.DevoxxCache;
+import com.devoxx.ejb.DevoxxFakeCache;
 import com.devoxx.model.Speaker;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -26,9 +26,10 @@ public class SpeakersRESTServiceTest {
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addPackage(Speaker.class.getPackage())
-                .addPackage(DevoxxReaderBean.class.getPackage())
-                .addPackage(DevoxxJSONReader.class.getPackage())
-                .addPackage(SpeakersRESTService.class.getPackage())
+                .addClass(DevoxxCache.class)
+                .addClass(DevoxxFakeCache.class)
+                .addClass(JaxRsActivator.class)
+                .addClass(SpeakersRESTService.class)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
