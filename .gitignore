@@ -6,3 +6,10 @@
 *.ear
 .settings
 target
+
+# Intellij Files #
+*.eml
+*.iml
+.idea
+
+.DS_Store

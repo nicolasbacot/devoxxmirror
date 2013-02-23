@@ -22,7 +22,7 @@ import com.devoxx.model.Talk;
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 @AccessTimeout (unit=TimeUnit.SECONDS, value=60)
 @Startup
-public class DevoxxCacheBean {
+public class DevoxxCacheBean implements DevoxxCache {
 
 	private Speaker[] speakers = null;
 	private Talk[] talks = null;
@@ -57,7 +57,7 @@ public class DevoxxCacheBean {
 	}
 
 	@Lock(LockType.WRITE)
-	private void storeData(Talk[] resultTalks, Speaker[] resultSpeakers){
+	void storeData(Talk[] resultTalks, Speaker[] resultSpeakers){
 		setSpeakers(resultSpeakers);
 		setTalks(resultTalks);
 		mapOfSpeakers = new HashMap<Long, Speaker>();
