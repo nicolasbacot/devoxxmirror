@@ -16,7 +16,6 @@ import com.devoxx.model.Speaker;
 public class DevoxxJSONReaderTest {
 
 	@Test
-	@Ignore
 	public void test_readSpeakers() {
 		Speaker[] result = DevoxxJSONReader.readSpeakers();
 		assertNotNull(result);
