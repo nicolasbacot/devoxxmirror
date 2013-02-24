@@ -1,5 +1,6 @@
 package com.devoxx.ejb;
 
+import com.devoxx.model.ScheduledSession;
 import com.devoxx.model.Speaker;
 import com.devoxx.model.Talk;
 
@@ -28,5 +29,10 @@ public class DevoxxFakeCache implements DevoxxCache {
     public Talk getTalk(String id) {
         return null;
     }
+
+	@Override
+	public ScheduledSession[] getSchedule(int day) {
+		return null;
+	}
 
 }

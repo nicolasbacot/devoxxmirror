@@ -1,5 +1,6 @@
 package com.devoxx.ejb;
 
+import com.devoxx.model.ScheduledSession;
 import com.devoxx.model.Speaker;
 import com.devoxx.model.Talk;
 
@@ -14,4 +15,7 @@ public interface DevoxxCache {
     void loadData();
 
     Talk getTalk(String id);
+    
+    ScheduledSession[] getSchedule(int day);
+
 }

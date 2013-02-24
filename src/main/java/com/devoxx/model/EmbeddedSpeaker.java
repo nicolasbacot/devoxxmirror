@@ -5,7 +5,7 @@ public class EmbeddedSpeaker {
 	
 	private String speaker;
 	
-	private String speakerId;
+	private Long speakerId;
 
 	public String getSpeakerUri() {
 		return speakerUri;
@@ -23,12 +23,13 @@ public class EmbeddedSpeaker {
 		this.speaker = speaker;
 	}
 
-	public String getSpeakerId() {
+	public Long getSpeakerId() {
 		return speakerId;
 	}
 
-	public void setSpeakerId(String speakerId) {
+	public void setSpeakerId(Long speakerId) {
 		this.speakerId = speakerId;
 	}
 
+	
 }
