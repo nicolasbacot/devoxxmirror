@@ -1,8 +1,9 @@
 package com.devoxx.rest;
 
-import com.devoxx.ejb.DevoxxCache;
-import com.devoxx.ejb.DevoxxFakeCache;
-import com.devoxx.model.Speaker;
+import java.net.URI;
+
+import javax.ws.rs.core.UriBuilder;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -16,12 +17,22 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.ws.rs.core.UriBuilder;
-import java.net.URI;
+import com.devoxx.ejb.DevoxxCache;
+import com.devoxx.ejb.DevoxxFakeCache;
+import com.devoxx.model.Speaker;
 
 @RunWith(Arquillian.class)
 public class SpeakersRESTServiceTest {
 
+
+	
+//	public static File[] getLibsFromArtifactIdAndGroup(String... mvnDef) {
+//        MavenDependencyResolver resolver =
+//                DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+//        return resolver.artifacts(mvnDef).resolveAsFiles();
+//    }
+
+	
     @Deployment(testable = false)
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -30,6 +41,7 @@ public class SpeakersRESTServiceTest {
                 .addClass(DevoxxFakeCache.class)
                 .addClass(JaxRsActivator.class)
                 .addClass(SpeakersRESTService.class)
+                //.addAsLibraries(getLibsFromArtifactIdAndGroup("org.jboss.resteasy:resteasy-jaxrs"))
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 

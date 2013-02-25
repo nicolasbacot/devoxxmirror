@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 
 import com.devoxx.ejb.DevoxxCache;
 import com.devoxx.model.ScheduledSession;
-
+import org.jboss.resteasy.annotations.cache.Cache;
 
 @Path("/schedule")
 @Produces("application/json")
@@ -19,6 +19,7 @@ public class ScheduleRESTService {
 	
     @GET
     @Path("/day/{id}")
+    @Cache(maxAge=3600)
     public ScheduledSession[] getSchedule(@PathParam("id") int id){
         return devoxxCache.getSchedule(id);
     }
