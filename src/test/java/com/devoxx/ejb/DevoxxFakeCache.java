@@ -13,7 +13,11 @@ public class DevoxxFakeCache implements DevoxxCache {
 
     @Override
     public Speaker getSpeaker(String id) {
-        return null;
+        Speaker speaker = new Speaker();
+        speaker.setId(new Long(id));
+        speaker.setFirstName("Steve");
+        speaker.setLastName("Jobs");
+        return speaker;
     }
 
     @Override
