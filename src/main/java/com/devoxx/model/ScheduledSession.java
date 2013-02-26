@@ -1,8 +1,16 @@
 package com.devoxx.model;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Instant;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 public class ScheduledSession {
 
-	private String speaker;
+    private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.S");
+
+    private String speaker;
 
 	private String presentationUri;
 
@@ -56,7 +64,19 @@ public class ScheduledSession {
 		this.code = code;
 	}
 
-	public String getFromTime() {
+    public String getFromHour() {
+        DateTime dateTime = formatter.parseDateTime(fromTime);
+        return dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+    }
+
+    public String getDurationMinute() {
+        Instant from = formatter.parseDateTime(fromTime).toInstant();
+        Instant to = formatter.parseDateTime(toTime).toInstant();
+        Duration duration = new Duration(from, to);
+        return Long.toString(duration.getStandardMinutes());
+    }
+
+    public String getFromTime() {
 		return fromTime;
 	}
 
@@ -99,6 +119,11 @@ public class ScheduledSession {
 	public String getToTime() {
 		return toTime;
 	}
+
+    public String getToHour() {
+        DateTime dateTime = formatter.parseDateTime(toTime);
+        return dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+    }
 
 	public void setToTime(String toTime) {
 		this.toTime = toTime;
