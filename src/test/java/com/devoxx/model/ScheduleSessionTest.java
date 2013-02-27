@@ -15,11 +15,27 @@ public class ScheduleSessionTest {
     }
 
     @Test
+    public void fromHour_should_return_hour_minute_with_zero() {
+        ScheduledSession session = new ScheduledSession();
+        session.setFromTime("2013-03-27 09:00:00.0");
+
+        assertThat(session.getFromHour()).isEqualTo("9:00");
+    }
+
+    @Test
     public void toHour_should_return_hour_minute() {
         ScheduledSession session = new ScheduledSession();
         session.setToTime("2013-03-27 12:30:00.0");
 
         assertThat(session.getToHour()).isEqualTo("12:30");
+    }
+
+    @Test
+    public void toHour_should_return_hour_minute_with_zero() {
+        ScheduledSession session = new ScheduledSession();
+        session.setToTime("2013-03-27 12:05:00.0");
+
+        assertThat(session.getToHour()).isEqualTo("12:05");
     }
 
     @Test
