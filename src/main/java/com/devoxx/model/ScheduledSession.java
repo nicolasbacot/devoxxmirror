@@ -65,8 +65,14 @@ public class ScheduledSession {
 	}
 
     public String getFromHour() {
-        DateTime dateTime = formatter.parseDateTime(fromTime);
-        return dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+        return formatHour(fromTime);
+    }
+
+    private String formatHour(String time) {
+        DateTime dateTime = formatter.parseDateTime(time);
+        int minuteOfHour = dateTime.getMinuteOfHour();
+        String minutes = minuteOfHour <10 ? "0"+minuteOfHour : ""+minuteOfHour;
+        return dateTime.getHourOfDay() + ":" + minutes;
     }
 
     public String getDurationMinute() {
@@ -121,8 +127,7 @@ public class ScheduledSession {
 	}
 
     public String getToHour() {
-        DateTime dateTime = formatter.parseDateTime(toTime);
-        return dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+        return formatHour(toTime);
     }
 
 	public void setToTime(String toTime) {
