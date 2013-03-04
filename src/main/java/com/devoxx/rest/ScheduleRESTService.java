@@ -7,6 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.devoxx.ejb.DevoxxCache;
+import com.devoxx.model.ScheduledRoom;
 import com.devoxx.model.ScheduledSession;
 import org.jboss.resteasy.annotations.cache.Cache;
 
@@ -24,6 +25,17 @@ public class ScheduleRESTService {
         return devoxxCache.getSchedule(id);
     }
 
-	
-	
+    @GET
+    @Path("/rooms")
+    @Cache(maxAge=3600)
+    public ScheduledRoom[] getScheduleRooms(){
+        return devoxxCache.getRooms();
+    }
+
+    @GET
+    @Path("/day/{day}/room/{roomId}")
+    @Cache(maxAge=3600)
+    public ScheduledSession[] getScheduleByRoom(@PathParam("day") int day, @PathParam("roomId") String roomId){
+        return devoxxCache.getScheduleByRoom(day, roomId);
+    }
 }
