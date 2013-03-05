@@ -46,6 +46,11 @@ public class DevoxxFakeCache implements DevoxxCache {
     }
 
     @Override
+    public ScheduledRoom getRoom(String id) {
+        return null;
+    }
+
+    @Override
     public ScheduledSession[] getScheduleByRoom(int day, String roomId) {
         return null;
     }

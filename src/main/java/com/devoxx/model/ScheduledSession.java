@@ -1,5 +1,6 @@
 package com.devoxx.model;
 
+import com.google.common.collect.BiMap;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
@@ -37,6 +38,8 @@ public class ScheduledSession {
 	private Long speakerId;
 
 	private Long presentationId;
+
+    private Long roomId;
 
 	private String room;
 
@@ -182,4 +185,11 @@ public class ScheduledSession {
 		this.room = room;
 	}
 
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
 }
