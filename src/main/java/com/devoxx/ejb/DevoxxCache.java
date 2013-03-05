@@ -21,6 +21,8 @@ public interface DevoxxCache {
 
     ScheduledRoom[] getRooms();
 
+    ScheduledRoom getRoom(String id);
+
     ScheduledSession[] getScheduleByRoom(int day, String roomId);
 
 }

@@ -61,11 +61,12 @@ public class DevoxxCacheBean implements DevoxxCache {
 	void storeData(Talk[] resultTalks, Speaker[] resultSpeakers, ScheduledSession[][] resultScheduledSessions, ScheduledRoom[] resultRooms) {
 		speakers = resultSpeakers;
         talks = resultTalks;
-		scheduledSessions = resultScheduledSessions;
 		mapOfSpeakers = new HashMap<Long, Speaker>();
 		mapOfTalks = new HashMap<Long, Talk>();
         mapOfRooms = new HashMap<Long, ScheduledRoom>();
-		for (Talk curTalk : resultTalks) {
+        Map<String, Long> mapOfRoomNames = new HashMap<String, Long>();
+
+        for (Talk curTalk : resultTalks) {
 			mapOfTalks.put(curTalk.getId(), curTalk);
 		}
 		for (Speaker curSpeaker : resultSpeakers) {
@@ -73,8 +74,16 @@ public class DevoxxCacheBean implements DevoxxCache {
 		}
         for (ScheduledRoom curRoom : resultRooms) {
             mapOfRooms.put(curRoom.getId(), curRoom);
+            mapOfRoomNames.put(curRoom.getName(), curRoom.getId());
         }
-	}
+        scheduledSessions = resultScheduledSessions;
+        for (int i = 0; i< scheduledSessions.length; i++) {
+            for (int j = 0; j<scheduledSessions[i].length; j++) {
+                Long roomId = mapOfRoomNames.get(scheduledSessions[i][j].getRoom());
+                scheduledSessions[i][j].setRoomId(roomId);
+            }
+        }
+    }
 
     @Override
     public Speaker getSpeaker(String id) {
@@ -85,6 +94,11 @@ public class DevoxxCacheBean implements DevoxxCache {
     public Talk getTalk(String id) {
 		return mapOfTalks.get(Long.valueOf(id));
 	}
+
+    @Override
+    public ScheduledRoom getRoom(String id) {
+        return mapOfRooms.get(Long.valueOf(id));
+    }
 
 	@Override
 	public ScheduledSession[] getSchedule(int day) {

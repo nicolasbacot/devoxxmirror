@@ -33,6 +33,13 @@ public class ScheduleRESTService {
     }
 
     @GET
+    @Path("/rooms/{roomId}")
+    @Cache(maxAge=3600)
+    public ScheduledRoom getScheduleRoom(@PathParam("roomId") String roomId){
+        return devoxxCache.getRoom(roomId);
+    }
+
+    @GET
     @Path("/day/{day}/room/{roomId}")
     @Cache(maxAge=3600)
     public ScheduledSession[] getScheduleByRoom(@PathParam("day") int day, @PathParam("roomId") String roomId){
