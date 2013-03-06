@@ -1,15 +1,18 @@
 package com.devoxx.model;
 
-import com.google.common.collect.BiMap;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.math.BigDecimal;
+
 public class ScheduledSession {
 
-    private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.S");
+    private static DateTimeFormatter HOUR_FORMATTER = DateTimeFormat.forPattern("HH:mm");
+    private static String START_HOUR = "07:00";
+    private static DateTimeFormatter FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.S");
 
     private String speaker;
 
@@ -71,19 +74,42 @@ public class ScheduledSession {
         return formatHour(fromTime);
     }
 
+    public String getStartHour() {
+        Instant start = HOUR_FORMATTER.parseDateTime(START_HOUR).toInstant();
+        Instant from = HOUR_FORMATTER.parseDateTime(getFromHour()).toInstant();
+        Duration duration = new Duration(start, from);
+        return toHour(duration);
+    }
+
     private String formatHour(String time) {
-        DateTime dateTime = formatter.parseDateTime(time);
+        DateTime dateTime = FORMATTER.parseDateTime(time);
         int minuteOfHour = dateTime.getMinuteOfHour();
         String minutes = minuteOfHour <10 ? "0"+minuteOfHour : ""+minuteOfHour;
         return dateTime.getHourOfDay() + ":" + minutes;
     }
 
     public String getDurationMinute() {
-        Instant from = formatter.parseDateTime(fromTime).toInstant();
-        Instant to = formatter.parseDateTime(toTime).toInstant();
-        Duration duration = new Duration(from, to);
+        Duration duration = getDuration();
         return Long.toString(duration.getStandardMinutes());
     }
+
+    private Duration getDuration() {
+        Instant from = FORMATTER.parseDateTime(fromTime).toInstant();
+        Instant to = FORMATTER.parseDateTime(toTime).toInstant();
+        return new Duration(from, to);
+    }
+
+    public String getDurationHour() {
+        Duration duration = getDuration();
+        return toHour(duration);
+    }
+
+    private String toHour(Duration duration) {
+        BigDecimal minutes = new BigDecimal(duration.getStandardMinutes());
+        BigDecimal hours = minutes.divide(new BigDecimal(60), 5, BigDecimal.ROUND_HALF_DOWN);
+        return hours.toString();
+    }
+
 
     public String getFromTime() {
 		return fromTime;
