@@ -1,0 +1,1 @@
+curl -i -H "Accept: application/json" -X POST http://localhost:8080/rest/talks/2767/poll

@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import org.jboss.resteasy.annotations.cache.Cache;
 
 import com.devoxx.ejb.DevoxxCache;
-import com.devoxx.model.Speaker;
+import com.devoxx.model.json.Speaker;
 
 
 @Path("/speakers")

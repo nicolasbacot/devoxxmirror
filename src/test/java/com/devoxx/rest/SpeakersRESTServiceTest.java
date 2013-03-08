@@ -2,7 +2,7 @@ package com.devoxx.rest;
 
 import com.devoxx.ejb.DevoxxCache;
 import com.devoxx.ejb.DevoxxFakeCache;
-import com.devoxx.model.Speaker;
+import com.devoxx.model.json.Speaker;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import org.apache.http.HttpResponse;

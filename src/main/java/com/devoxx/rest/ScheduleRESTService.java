@@ -7,8 +7,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.devoxx.ejb.DevoxxCache;
-import com.devoxx.model.ScheduledRoom;
-import com.devoxx.model.ScheduledSession;
+import com.devoxx.model.json.ScheduledRoom;
+import com.devoxx.model.json.ScheduledSession;
+
 import org.jboss.resteasy.annotations.cache.Cache;
 
 @Path("/schedule")

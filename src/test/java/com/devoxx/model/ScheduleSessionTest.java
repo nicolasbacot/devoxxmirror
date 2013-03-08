@@ -2,6 +2,8 @@ package com.devoxx.model;
 
 import org.junit.Test;
 
+import com.devoxx.model.json.ScheduledSession;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class ScheduleSessionTest {

@@ -6,15 +6,15 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.devoxx.model.ScheduledRoom;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.devoxx.model.ScheduledSession;
-import com.devoxx.model.Speaker;
-import com.devoxx.model.Talk;
+import com.devoxx.model.json.ScheduledRoom;
+import com.devoxx.model.json.ScheduledSession;
+import com.devoxx.model.json.Speaker;
+import com.devoxx.model.json.Talk;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 

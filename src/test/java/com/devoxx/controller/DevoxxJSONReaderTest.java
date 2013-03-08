@@ -9,9 +9,9 @@ import static org.fest.assertions.api.Assertions.filter;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.devoxx.model.EmbeddedSpeaker;
-import com.devoxx.model.ScheduledSession;
-import com.devoxx.model.Speaker;
+import com.devoxx.model.json.EmbeddedSpeaker;
+import com.devoxx.model.json.ScheduledSession;
+import com.devoxx.model.json.Speaker;
 
 public class DevoxxJSONReaderTest {
 

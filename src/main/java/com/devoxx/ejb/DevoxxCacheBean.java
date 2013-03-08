@@ -16,10 +16,10 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 import com.devoxx.controller.DevoxxJSONReader;
-import com.devoxx.model.ScheduledRoom;
-import com.devoxx.model.ScheduledSession;
-import com.devoxx.model.Speaker;
-import com.devoxx.model.Talk;
+import com.devoxx.model.json.ScheduledRoom;
+import com.devoxx.model.json.ScheduledSession;
+import com.devoxx.model.json.Speaker;
+import com.devoxx.model.json.Talk;
 
 @Singleton
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)

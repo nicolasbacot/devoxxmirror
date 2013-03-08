@@ -1,9 +1,9 @@
 package com.devoxx.ejb;
 
-import com.devoxx.model.ScheduledRoom;
-import com.devoxx.model.ScheduledSession;
-import com.devoxx.model.Speaker;
-import com.devoxx.model.Talk;
+import com.devoxx.model.json.ScheduledRoom;
+import com.devoxx.model.json.ScheduledSession;
+import com.devoxx.model.json.Speaker;
+import com.devoxx.model.json.Talk;
 
 public class DevoxxFakeCache implements DevoxxCache {
 
