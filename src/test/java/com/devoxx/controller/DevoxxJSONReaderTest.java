@@ -1,12 +1,11 @@
 package com.devoxx.controller;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.api.Assertions.extractProperty;
 import static org.fest.assertions.api.Assertions.filter;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.devoxx.model.json.EmbeddedSpeaker;
@@ -16,7 +15,6 @@ import com.devoxx.model.json.Speaker;
 public class DevoxxJSONReaderTest {
 
 	@Test
-	@Ignore
 	public void test_readSpeakers() {
 		Speaker[] result = DevoxxJSONReader.readSpeakers();
 		assertNotNull(result);
