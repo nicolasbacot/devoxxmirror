@@ -27,6 +27,8 @@ public class Talk {
 	private String language;
 
 	private String room;
+	
+	private Long nbVotes;
 
 	public String getSummary() {
 		return summary;
@@ -131,5 +133,14 @@ public class Talk {
 	public void setRoom(String room) {
 		this.room = room;
 	}
+
+	public Long getNbVotes() {
+		return nbVotes;
+	}
+
+	public void setNbVotes(Long nbVotes) {
+		this.nbVotes = nbVotes;
+	}
+	
 
 }

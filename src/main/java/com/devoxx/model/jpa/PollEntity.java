@@ -27,4 +27,10 @@ public class PollEntity {
 		this.userName = userName;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	
+	
+
 }
