@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import com.devoxx.model.jpa.PollEntity;
+import com.devoxx.model.json.TalkPoll;
 import org.jboss.resteasy.annotations.cache.Cache;
 
 import com.devoxx.ejb.DevoxxCache;
@@ -42,7 +44,7 @@ public class TalksRESTService {
 
 	@POST
 	@Path("{id}/poll")
-	public void pollForTalk(@PathParam("id") String id) {
+	public void pollOnTalk(@PathParam("id") String id) {
 		Talk talk = new Talk();
 		talk.setId(Long.valueOf(id));
 		talkEJB.pollOnTalk(talk);
@@ -50,20 +52,21 @@ public class TalksRESTService {
 
     @GET
     @Path("{id}/poll")
-    public Integer pollAndGetSizeForTalk(@PathParam("id") String id) {
+    public TalkPoll pollAndGetTalkPoll(@PathParam("id") String id) {
         Talk talk = new Talk();
         talk.setId(Long.valueOf(id));
-        return talkEJB.pollOnTalk(talk);
+        int poll = talkEJB.pollOnTalk(talk);
+        return new TalkPoll(talk.getId(), poll);
     }
 
     @GET
     @Path("{id}/pollsize")
-    public Integer getPollSizeForTalk(@PathParam("id") String id) {
+    public TalkPoll getTalkPoll(@PathParam("id") String id) {
         Talk talk = new Talk();
         talk.setId(Long.valueOf(id));
-        return talkEJB.getPollSize(talk);
+        int poll = talkEJB.getPollSize(talk);
+        return new TalkPoll(talk.getId(), poll);
     }
-
 
 	@GET
 	@Path("/top/{nb}")
