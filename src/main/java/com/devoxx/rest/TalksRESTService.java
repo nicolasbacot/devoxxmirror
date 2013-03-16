@@ -48,6 +48,23 @@ public class TalksRESTService {
 		talkEJB.pollOnTalk(talk);
 	}
 
+    @GET
+    @Path("{id}/poll")
+    public Integer pollAndGetSizeForTalk(@PathParam("id") String id) {
+        Talk talk = new Talk();
+        talk.setId(Long.valueOf(id));
+        return talkEJB.pollOnTalk(talk);
+    }
+
+    @GET
+    @Path("{id}/pollsize")
+    public Integer getPollSizeForTalk(@PathParam("id") String id) {
+        Talk talk = new Talk();
+        talk.setId(Long.valueOf(id));
+        return talkEJB.getPollSize(talk);
+    }
+
+
 	@GET
 	@Path("/top/{nb}")
 	public List<Talk> getTopTalks(@PathParam("nb") String nb) {
