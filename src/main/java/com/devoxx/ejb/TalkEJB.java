@@ -24,7 +24,7 @@ public class TalkEJB {
 	@PersistenceContext
 	EntityManager em;
 
-	public void pollOnTalk(Talk talk) {
+	public int pollOnTalk(Talk talk) {
 		TalkEntity managedTalk = em.find(TalkEntity.class, talk.getId());
 		if (managedTalk == null) {
 			managedTalk = new TalkEntity();
@@ -35,7 +35,13 @@ public class TalkEJB {
 		em.persist(poll);
 		managedTalk.addPoll(poll);
 		em.merge(managedTalk);
+        return managedTalk.getListOfPolls().size();
 	}
+
+    public int getPollSize(Talk talk) {
+        TalkEntity managedTalk = em.find(TalkEntity.class, talk.getId());
+        return managedTalk == null ? 0 : managedTalk.getListOfPolls().size();
+    }
 
 	public TalkEntity createTalk(TalkEntity talk) {
 		if (talk != null) {
