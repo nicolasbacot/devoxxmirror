@@ -20,4 +20,12 @@ public class TalkPoll {
     public void setTalkdId(Long talkdId) {
         this.talkdId = talkdId;
     }
+
+    public int getNbPolls() {
+        return nbPolls;
+    }
+
+    public void setNbPolls(int nbPolls) {
+        this.nbPolls = nbPolls;
+    }
 }
