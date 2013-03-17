@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "Poll")
 public class PollEntity {
@@ -16,6 +18,7 @@ public class PollEntity {
 
 	String userName = "anonymous";
 
+	@Temporal(TemporalType.DATE)
 	Date creationDate;
 
 	@PrePersist

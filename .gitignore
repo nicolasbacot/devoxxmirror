@@ -1,5 +1,8 @@
 *.class
 
+# Log Files #
+derby.log
+
 # Package Files #
 *.jar
 *.war
