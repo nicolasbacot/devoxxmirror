@@ -35,13 +35,13 @@ public class TalkEJB {
 		em.persist(poll);
 		managedTalk.addPoll(poll);
 		em.merge(managedTalk);
-        return managedTalk.getListOfPolls().size();
+		return managedTalk.getListOfPolls().size();
 	}
 
-    public int getPollSize(Talk talk) {
-        TalkEntity managedTalk = em.find(TalkEntity.class, talk.getId());
-        return managedTalk == null ? 0 : managedTalk.getListOfPolls().size();
-    }
+	public int getPollSize(Talk talk) {
+		TalkEntity managedTalk = em.find(TalkEntity.class, talk.getId());
+		return managedTalk == null ? 0 : managedTalk.getListOfPolls().size();
+	}
 
 	public TalkEntity createTalk(TalkEntity talk) {
 		if (talk != null) {
@@ -50,28 +50,32 @@ public class TalkEJB {
 		return talk;
 	}
 
+	public List<TalkWithPollResult> getTopTalks() {
+		return getTopTalks(-1);
+	}
+
 	public List<TalkWithPollResult> getTopTalks(int nbTalks) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<TalkWithPollResult> cq = cb
 				.createQuery(TalkWithPollResult.class);
 		Root<TalkEntity> from = cq.from(TalkEntity.class);
 		ListJoin<TalkEntity, PollEntity> polls = from.join(
-				TalkEntity_.listOfPolls, JoinType.LEFT);
+				TalkEntity_.listOfPolls, JoinType.INNER);
 		cq.multiselect(cb.count(polls), from.get(TalkEntity_.id));
 		cq.groupBy(from.get(TalkEntity_.id));
 		cq.orderBy(cb.desc(cb.count(polls)));
 		Query q = em.createQuery(cq);
-		q.setMaxResults(nbTalks);
+		if (nbTalks > 0) {
+			q.setMaxResults(nbTalks);
+		}
 		@SuppressWarnings("unchecked")
 		List<TalkWithPollResult> out = q.getResultList();
 		return out;
 	}
-	
-	public void deleteAllPolls(){
+
+	public void deleteAllPolls() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<TalkEntity> cq = cb
-				.createQuery(TalkEntity.class);
-		Root<TalkEntity> from = cq.from(TalkEntity.class);
+		CriteriaQuery<TalkEntity> cq = cb.createQuery(TalkEntity.class);
 		Query q = em.createQuery(cq);
 
 		List<TalkEntity> results = q.getResultList();

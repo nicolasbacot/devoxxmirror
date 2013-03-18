@@ -3,6 +3,7 @@ package com.devoxx.ejb;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,15 +15,13 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
-import org.junit.Assume;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.devoxx.model.jpa.TalkEntity;
+import com.devoxx.model.jpa.TalkWithPollResult;
 import com.devoxx.model.json.Talk;
 import com.devoxx.model.json.TalkBuilder;
-import com.devoxx.rest.SpeakersRESTServiceTest;
 
 @RunWith(Arquillian.class)
 public class TalkEJBTest {
@@ -54,6 +53,37 @@ public class TalkEJBTest {
 		
 	}
 
+	@Test
+	public void topTalkShouldReturnTalkWithPoll() throws Exception {
+		Long id = System.currentTimeMillis();
+		TalkEntity talkWithoutPoll = new TalkEntity();
+		talkWithoutPoll.setId(id);
+		talkEJB.pollOnTalk(TalkBuilder.talk().withId(id).build());
+		assertThat(contains(talkEJB.getTopTalks(),id)).isTrue();
+	}
+
+	
+	@Test
+	public void topTalkShouldNotReturnTalkWithoutPoll() throws Exception {
+		Long id = System.currentTimeMillis();
+		TalkEntity talkWithoutPoll = new TalkEntity();
+		talkWithoutPoll.setId(id);
+		talkEJB.createTalk(talkWithoutPoll);
+		assertThat(contains(talkEJB.getTopTalks(),id)).isFalse();
+	}
+	
+	private boolean contains(List<TalkWithPollResult> listOfTalkWithPollResult, Long talkId) {
+		boolean out = false; 
+		int i = 0;
+		while(!out && i < listOfTalkWithPollResult.size()){
+			if (talkId.equals(listOfTalkWithPollResult.get(i).getTalkId())){
+				out = true;
+			}
+			i++;
+		}
+		return out;
+	}
+	
 	@Test
 	public void deleteAllPollsShouldDeleteAllPolls() throws Exception {
 		int nbPollToAdd = 3;
