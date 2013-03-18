@@ -87,5 +87,11 @@ public class TalksRESTService {
 		}
 		return out;
 	}
+	
+	@POST
+	@Path("/polls/reset")
+	public void resetPolls(){
+		talkEJB.deleteAllPolls();
+	}
 
 }

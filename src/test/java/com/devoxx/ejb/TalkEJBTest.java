@@ -14,6 +14,8 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,4 +54,21 @@ public class TalkEJBTest {
 		
 	}
 
+	@Test
+	public void deleteAllPollsShouldDeleteAllPolls() throws Exception {
+		int nbPollToAdd = 3;
+		Long id = System.currentTimeMillis();
+		Talk talk = TalkBuilder.talk().withId(id).build();
+		for (int i = 0 ;i < nbPollToAdd ; i ++){
+			talkEJB.pollOnTalk(talk);					
+		}
+		
+		//TODO replace this with junit-checker
+		assertThat(talkEJB.getPollSize(talk)).isGreaterThanOrEqualTo(nbPollToAdd);
+		
+		talkEJB.deleteAllPolls();
+		assertThat(talkEJB.getPollSize(talk)).isEqualTo(0);		
+	}
+
+	
 }

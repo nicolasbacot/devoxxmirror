@@ -18,7 +18,7 @@ public class PollEntity {
 
 	String userName = "anonymous";
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	Date creationDate;
 
 	@PrePersist

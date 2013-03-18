@@ -66,4 +66,18 @@ public class TalkEJB {
 		List<TalkWithPollResult> out = q.getResultList();
 		return out;
 	}
+	
+	public void deleteAllPolls(){
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<TalkEntity> cq = cb
+				.createQuery(TalkEntity.class);
+		Root<TalkEntity> from = cq.from(TalkEntity.class);
+		Query q = em.createQuery(cq);
+
+		List<TalkEntity> results = q.getResultList();
+		for (TalkEntity talkEntity : results) {
+			talkEntity.getListOfPolls().clear();
+			em.persist(talkEntity);
+		}
+	}
 }
