@@ -76,6 +76,7 @@ public class TalkEJB {
 	public void deleteAllPolls() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<TalkEntity> cq = cb.createQuery(TalkEntity.class);
+		cq.from(TalkEntity.class);
 		Query q = em.createQuery(cq);
 
 		List<TalkEntity> results = q.getResultList();
