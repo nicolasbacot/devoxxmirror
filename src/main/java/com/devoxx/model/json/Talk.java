@@ -29,6 +29,16 @@ public class Talk {
 	private String room;
 	
 	private Long nbVotes;
+	
+	private String date;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getSummary() {
 		return summary;

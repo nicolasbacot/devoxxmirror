@@ -39,7 +39,8 @@ public class TalksRESTService {
 	@Path("{id}")
 	@Cache(maxAge = 3600)
 	public Talk getTalk(@PathParam("id") String id) {
-		return devoxxCache.getTalk(id);
+		Talk out = devoxxCache.getTalk(id);
+		return out;
 	}
 
 	@POST
