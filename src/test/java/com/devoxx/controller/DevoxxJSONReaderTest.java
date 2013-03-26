@@ -83,5 +83,12 @@ public class DevoxxJSONReaderTest {
 		out.setSpeakers(speakers);
 		return out;
 	}
+	
+	@Test
+	public void test_tmp(){
+		Long un = new Long(1);
+		Long deux = new Long(1);
+		assertThat(un.equals(deux)).isTrue();
+	}
 
 }

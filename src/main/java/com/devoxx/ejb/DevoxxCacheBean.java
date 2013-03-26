@@ -112,7 +112,7 @@ public class DevoxxCacheBean implements DevoxxCache {
 		while (i < scheduledSessions.length && !found) {
 			while (j < scheduledSessions[i].length && !found) {
 				ScheduledSession session = scheduledSessions[i][j];
-				if (id.equals(session.getId())) {
+				if (id.equals(session.getPresentationId())) {
 					out = session.getFromTime();
 					found = true;
 				}
