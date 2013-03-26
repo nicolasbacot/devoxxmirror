@@ -55,6 +55,7 @@ public class DevoxxCacheBean implements DevoxxCache {
 		ScheduledSession[][] resultScheduledSessions = DevoxxJSONReader
 				.readSchedule();
 		ScheduledRoom[] resultRooms = DevoxxJSONReader.readRooms();
+
 		storeData(resultTalks, resultSpeakers, resultScheduledSessions,
 				resultRooms);
 	}
@@ -69,7 +70,7 @@ public class DevoxxCacheBean implements DevoxxCache {
 		mapOfTalks = new HashMap<Long, Talk>();
 		mapOfRooms = new HashMap<Long, ScheduledRoom>();
 		Map<String, Long> mapOfRoomNames = new HashMap<String, Long>();
-
+		Talk currentTalk;
 		for (Talk curTalk : resultTalks) {
 			mapOfTalks.put(curTalk.getId(), curTalk);
 		}
@@ -85,6 +86,10 @@ public class DevoxxCacheBean implements DevoxxCache {
 			for (int j = 0; j < scheduledSessions[i].length; j++) {
 				Long roomId = mapOfRoomNames.get(scheduledSessions[i][j]
 						.getRoom());
+				currentTalk = mapOfTalks.get(scheduledSessions[i][j].getPresentationId());
+				if (currentTalk != null){
+					currentTalk.setDate(scheduledSessions[i][j].getFromTime());
+				}
 				scheduledSessions[i][j].setRoomId(roomId);
 			}
 		}
@@ -98,29 +103,6 @@ public class DevoxxCacheBean implements DevoxxCache {
 	@Override
 	public Talk getTalk(String id) {
 		Talk out = mapOfTalks.get(Long.valueOf(id));
-		if (out.getDate() == null || "".equals(out.getDate())) {
-			out.setDate(getDateFromTalkId(out.getId()));
-		}
-		return out;
-	}
-
-	private String getDateFromTalkId(Long id) {
-		String out = null;
-		boolean found = false;
-		int i = 0;
-		int j = 0;
-		while (i < scheduledSessions.length && !found) {
-			while (j < scheduledSessions[i].length && !found) {
-				ScheduledSession session = scheduledSessions[i][j];
-				if (id.equals(session.getPresentationId())) {
-					out = session.getFromTime();
-					found = true;
-				}
-				j++;
-			}
-			i++;
-		}
-
 		return out;
 	}
 
